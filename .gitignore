@@ -1,0 +1,9 @@
+node_modules
+build
+
+.env
+.vscode
+.DS_Store
+
+yarn-debug.log*
+yarn-error.log*
