@@ -27,6 +27,8 @@ module.exports = {
     "comma-dangle": [2, "only-multiline"],
     "import/no-unresolved": 0,
     "import/extensions": 0,
+    "class-methods-use-this": 0,
+    "no-useless-constructor": 0,
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-empty-interface": 0,
