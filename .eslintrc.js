@@ -28,6 +28,7 @@ module.exports = {
     "import/no-unresolved": 0,
     "import/extensions": 0,
     "class-methods-use-this": 0,
+    "lines-between-class-members": 0,
     "no-useless-constructor": 0,
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/no-var-requires": 0,
