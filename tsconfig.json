@@ -11,6 +11,7 @@
     "strict": true,
     "esModuleInterop": true, // ES6 모듈 사양으로 CommonJS 모듈을 import 할 수 있음.
     "skipLibCheck": true, // *.d.ts 파일의 타입 체크를 건너뜀.
-    "forceConsistentCasingInFileNames": true // 파일명에 대소문자를 구분하지 않아도 됨.
+    "forceConsistentCasingInFileNames": true, // 파일명에 대소문자를 구분하지 않아도 됨.
+    "downlevelIteration": true
   }
 }
