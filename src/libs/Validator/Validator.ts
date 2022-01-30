@@ -4,22 +4,42 @@ class Validator {
     const replaced = value.replace(regExp, "");
 
     if (replaced === "") {
-      throw new Error("String value is empty!");
+      throw new Error("Value is empty.");
     }
 
     return this;
   }
 
-  isDate(date: string): this {
-    if (!date) {
+  isDate(value: string): this {
+    if (!value) {
       return this;
     }
 
-    const regExp = /\d{4}-\d{1,2}-\d{1,2}/gi;
-    const matched = date.match(regExp);
+    const regExp = /\d{4}-\d{1,2}-\d{1,2}/g;
+    const matched = value.match(regExp);
 
     if (!matched) {
-      throw new Error("String date does not match the format!");
+      throw new Error(`${value} is not a date.`);
+    }
+
+    return this;
+  }
+
+  isFileName(value: string): this {
+    const regExp = /\d{4}-\d{1,2}-\d{1,2}-.+/g;
+
+    if (!regExp.test(value)) {
+      throw new Error(`${value} is not a file name.`);
+    }
+
+    return this;
+  }
+
+  isMetaData(value: string): this {
+    const regExp = /(?:\w+:\s?.+\n)+/g;
+
+    if (!regExp.test(value)) {
+      throw new Error(`${value} is not a metadata.`);
     }
 
     return this;
