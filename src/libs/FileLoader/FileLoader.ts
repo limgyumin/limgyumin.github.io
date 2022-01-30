@@ -1,28 +1,30 @@
+import FileNameExtractor from "../Extractor/FileNameExtractor";
+
 class FileLoader {
   constructor(private readonly context: __WebpackModuleApi.RequireContext) {}
-
-  get paths() {
-    return this.context.keys();
-  }
-
-  private getAllOriginalPaths() {
-    return this.paths.map(this.context) as string[];
-  }
 
   private async getText(originalPath: string): Promise<string> {
     return fetch(originalPath).then((res) => res.text());
   }
 
-  async read(fileName: string): Promise<string> {
-    const matched = this.paths.filter((path) => path.includes(fileName))[0];
+  async find(fileName: string): Promise<string> {
+    const extractor = new FileNameExtractor();
 
-    const originalPath = this.context(matched);
+    const found = this.context
+      .keys()
+      .find((path) => extractor.extract(path) === fileName);
+
+    if (!found) {
+      throw new Error(`${fileName} file not found.`);
+    }
+
+    const originalPath = this.context(found);
 
     return this.getText(originalPath);
   }
 
-  async readAll(): Promise<string[]> {
-    const originalPaths = this.getAllOriginalPaths();
+  async findAll(): Promise<string[]> {
+    const originalPaths = this.context.keys().map(this.context) as string[];
 
     return Promise.all(originalPaths.map(this.getText));
   }
