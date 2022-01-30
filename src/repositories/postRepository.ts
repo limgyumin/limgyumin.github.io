@@ -1,17 +1,19 @@
-import markdownLoader from "@/libs/FileLoader/MarkdownLoader";
-import FilePathParser from "@/libs/FilePathParser/FilePathParser";
 import Post from "@/models/post";
+import markdownLoader from "@/libs/FileLoader/MarkdownLoader";
+import MetaDataExtractor from "@/libs/Extractor/MetaDataExtractor";
+import MetaDataParser from "@/libs/Parser/MetaDataParser";
 
 class PostRepository {
-  fetchPosts(): Post[] {
-    const { paths } = markdownLoader;
+  async fetchPosts(): Promise<Post[]> {
+    const files = await markdownLoader.findAll();
 
-    const parser = new FilePathParser();
+    const extractor = new MetaDataExtractor();
+    const parser = new MetaDataParser();
 
-    const posts = paths.map((path) => {
-      const [title, createdAt] = parser.parse(path);
+    const posts = files.map((file) => {
+      const metaData = extractor.extract(file);
 
-      return new Post(title, createdAt);
+      return new Post(parser.toObject(metaData));
     });
 
     return posts;
