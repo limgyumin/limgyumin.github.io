@@ -20,6 +20,8 @@
     "@babel/runtime": "^7.16.7",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.21",
     "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
@@ -44,7 +46,12 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
+    "mobx": "^6.3.13",
+    "mobx-react": "^7.2.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1",
+    "styled-components": "^5.3.3",
+    "styled-reset": "^4.3.4"
   }
 }
