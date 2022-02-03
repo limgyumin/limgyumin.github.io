@@ -1,9 +1,9 @@
-import Validator from "../Validator/Validator";
+import MarkdownValidator from "../Validator/MarkdownValidator";
 import FileLoader from "./FileLoader";
 
 class MarkdownLoader extends FileLoader {
   async find(fileName: string): Promise<string> {
-    new Validator().isFileName(fileName);
+    new MarkdownValidator().validate(fileName);
 
     return super.find(fileName);
   }
