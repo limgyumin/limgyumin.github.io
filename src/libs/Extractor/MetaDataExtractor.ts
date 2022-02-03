@@ -1,5 +1,5 @@
-import Validator from "../Validator/Validator";
 import Extractor from "./Extractor";
+import MetaDataValidator from "../Validator/MetaDataValidator";
 
 class MetaDataExtractor implements Extractor {
   extract(value: string): string {
@@ -12,7 +12,7 @@ class MetaDataExtractor implements Extractor {
 
     const [, , metaData] = matched;
 
-    new Validator().isMetaData(metaData);
+    new MetaDataValidator().validate(metaData);
 
     return metaData;
   }
