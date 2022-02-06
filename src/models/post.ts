@@ -1,4 +1,5 @@
 export type PostInitializer = {
+  id: string;
   title: string;
   description: string;
   category: string;
@@ -6,12 +7,14 @@ export type PostInitializer = {
 };
 
 class Post {
+  id: string;
   title: string;
   description: string;
   category: string;
   createdAt: string;
 
   constructor(post: PostInitializer) {
+    this.id = post.id;
     this.title = post.title;
     this.description = post.description;
     this.category = post.category;

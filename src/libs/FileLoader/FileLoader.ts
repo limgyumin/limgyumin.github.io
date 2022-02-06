@@ -1,5 +1,10 @@
 import FileNameExtractor from "../Extractor/FileNameExtractor";
 
+type FileData = {
+  fileName: string;
+  data: string;
+};
+
 class FileLoader {
   constructor(private readonly context: __WebpackModuleApi.RequireContext) {}
 
@@ -23,10 +28,19 @@ class FileLoader {
     return this.getText(originalPath);
   }
 
-  async findAll(): Promise<string[]> {
-    const originalPaths = this.context.keys().map(this.context) as string[];
+  async findAll(): Promise<FileData[]> {
+    const extractor = new FileNameExtractor();
 
-    return Promise.all(originalPaths.map(this.getText));
+    const fileDataList: FileData[] = await Promise.all(
+      this.context.keys().map(async (path) => {
+        const data = await this.getText(this.context(path));
+        const fileName = extractor.extract(path);
+
+        return { fileName, data };
+      }),
+    );
+
+    return fileDataList;
   }
 }
 
