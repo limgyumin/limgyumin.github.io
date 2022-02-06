@@ -1,7 +1,14 @@
-import React from "react";
+import React, { ReactElement } from "react";
+import { Routes, Route } from "react-router-dom";
 
-const App: React.FC = () => {
-  return <div>This is App Component.</div>;
-};
+import * as Pages from "@/pages";
+
+function App(): ReactElement {
+  return (
+    <Routes>
+      <Route path="/" element={<Pages.Main />} />
+    </Routes>
+  );
+}
 
 export default App;
