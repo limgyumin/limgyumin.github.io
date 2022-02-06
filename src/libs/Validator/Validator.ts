@@ -1,10 +1,10 @@
 import { State, Validations } from "./types";
 
-class Validator<T extends object, K extends keyof T> {
+class Validator<T extends object> {
   constructor(private readonly object: T) {}
 
   validate(validations: Validations<T>) {
-    const keys = Object.keys(validations) as K[];
+    const keys = Object.keys(validations) as (keyof T)[];
 
     keys.forEach((key) => {
       validations[key].forEach((validation) => {

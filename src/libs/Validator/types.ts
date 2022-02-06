@@ -16,6 +16,6 @@ type ValidationResult = Success | Failure;
 
 export type Validation<T> = (value: T) => ValidationResult;
 
-export type Validations<T, U = T[keyof T]> = {
-  [key in keyof T]: Validation<U>[];
+export type Validations<T> = {
+  [K in keyof T]: Validation<T[K]>[];
 };
