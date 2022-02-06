@@ -19,18 +19,20 @@ class PostRepository {
     const parser = new MetaDataParser();
     const comparator = new ObjectComparator();
 
-    const posts = files.map((file) => {
-      const metaData = parser.toObject(extractor.extract(file));
-      const post = new Post(metaData as PostInitializer);
+    const posts = files.map(({ fileName, data }) => {
+      const metaData = parser.toObject(extractor.extract(data));
+      const postData = { id: fileName, ...metaData } as PostInitializer;
+
+      const post = new Post(postData);
 
       comparator.compare(post, metaData);
 
       new Validator(post).validate({
+        id: [isFixedFileName],
         title: [isNotEmpty],
         description: [isNotEmpty],
         category: [],
         createdAt: [isFixedDateFormat],
-        key: [isFixedFileName],
       });
 
       return post;
