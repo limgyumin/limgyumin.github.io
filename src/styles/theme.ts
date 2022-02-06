@@ -1,7 +1,13 @@
 const colors = {
-  bgWhite: "#FFF",
+  bgWhite: "#fff",
+  bgGray: "#f0f0f0",
+  bgBlack: "#1b1b1b",
 
-  ftBlack: "#000",
+  ftWhite: "#f8f8f8",
+  ftBlack: "#1b1b1b",
+  ftGray: "#d9d9d9",
+
+  boxShadow: "rgba(0,0,0,0.4)",
 };
 
 const sizes = {
