@@ -38,8 +38,12 @@ function PageNavigation(): ReactElement | null {
   };
 
   return (
-    <Container>
-      <ArrowButton active={hasPrevPage} onClick={handleDecreasePage}>
+    <Container data-testid="page-navigation">
+      <ArrowButton
+        data-testid="page-navigation-prev-btn"
+        active={hasPrevPage}
+        onClick={handleDecreasePage}
+      >
         <RiArrowLeftSLine />
       </ArrowButton>
       <PageNumbers>
@@ -53,7 +57,11 @@ function PageNavigation(): ReactElement | null {
           </PageNumberButton>
         ))}
       </PageNumbers>
-      <ArrowButton active={hasNextPage} onClick={handleIncreasePage}>
+      <ArrowButton
+        data-testid="page-navigation-next-btn"
+        active={hasNextPage}
+        onClick={handleIncreasePage}
+      >
         <RiArrowRightSLine />
       </ArrowButton>
     </Container>
