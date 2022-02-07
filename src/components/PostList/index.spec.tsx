@@ -2,7 +2,7 @@ import React from "react";
 
 import PostList from ".";
 import postStore from "@/stores/postStore";
-import { render, screen, waitFor } from "@/testing-utils";
+import { render, screen } from "@/testing-utils";
 import postFactory from "@/testing-utils/Factory/PostFactory";
 
 const mockPosts = postFactory.buildList(5);
@@ -16,17 +16,15 @@ jest.mock("@/repositories/postRepository", () =>
 );
 
 describe("PostList", () => {
-  describe("글 목록이 조회되면", () => {
+  describe("컴포넌트가 렌더되면", () => {
     beforeEach(() => {
       render(<PostList />, {});
 
       postStore.fetchPosts();
     });
 
-    it("글 목록 컴포넌트가 렌더되어야 한다.", async () => {
-      await waitFor(() => {
-        expect(screen.getByTestId("post-list")).toBeInTheDocument();
-      });
+    it("글 목록을 확인할 수 있어야 한다.", () => {
+      expect(screen.getByTestId("post-list")).toBeInTheDocument();
     });
   });
 });
