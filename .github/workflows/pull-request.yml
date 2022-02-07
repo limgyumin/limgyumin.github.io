@@ -1,7 +1,7 @@
 name: Dev
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -21,4 +21,4 @@ jobs:
         run: yarn
 
       - name: Unit testing
-        run: yarn test:all
+        run: yarn test
