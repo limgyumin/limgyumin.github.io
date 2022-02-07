@@ -5,7 +5,7 @@ import { render, screen } from "@/testing-utils";
 import postFactory from "@/testing-utils/Factory/PostFactory";
 
 describe("PostItem", () => {
-  describe("게시글 아이템이 렌더되면", () => {
+  describe("컴포넌트가 렌더되면", () => {
     beforeEach(() => {
       const post = postFactory.build();
 
