@@ -1,9 +1,9 @@
-name: Request merging from develop to master
+name: Dev
 
 on:
-  pull_request:
+  push:
     branches:
-      - master
+      - main
 
 jobs:
   unit-testing:
@@ -21,4 +21,4 @@ jobs:
         run: yarn
 
       - name: Unit testing
-        run: yarn test
+        run: yarn test:all
