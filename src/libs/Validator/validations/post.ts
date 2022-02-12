@@ -1,4 +1,4 @@
-import { State, Validation } from "../types";
+import { State, Validation } from "../Validator";
 
 export const isMetaData: Validation<string> = (value: string) => {
   if (/(?:\w+:\s?.+\n)+/g.test(value)) {

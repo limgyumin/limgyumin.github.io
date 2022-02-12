@@ -1,4 +1,4 @@
-import { State, Validation } from "../types";
+import { State, Validation } from "../Validator";
 
 export const isRequired: Validation<string> = (
   value: string | null | undefined,
