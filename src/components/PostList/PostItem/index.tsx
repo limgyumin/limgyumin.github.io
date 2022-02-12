@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
 
-import Post from "@/models/post";
+import Post from "@/models/Post";
 import DateFormatter from "@/utils/date";
 
 type Props = {

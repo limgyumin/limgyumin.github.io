@@ -4,13 +4,15 @@ import PostList from ".";
 import postStore from "@/stores/postStore";
 import { render, screen } from "@/testing-utils";
 import postFactory from "@/testing-utils/Factory/PostFactory";
+import { POST_COUNT_PER_FETCH } from "@/constants/post";
 
-const mockPosts = postFactory.buildList(5);
+const mockTotal = 5 * POST_COUNT_PER_FETCH;
+const mockPosts = postFactory.buildList(POST_COUNT_PER_FETCH);
 
 jest.mock("@/repositories/postRepository", () =>
   jest.fn().mockImplementation(() => ({
     fetchPosts() {
-      return mockPosts;
+      return { posts: mockPosts, total: mockTotal };
     },
   })),
 );

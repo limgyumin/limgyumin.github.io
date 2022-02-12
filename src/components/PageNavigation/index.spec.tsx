@@ -6,22 +6,27 @@ import postFactory from "@/testing-utils/Factory/PostFactory";
 import postStore from "@/stores/postStore";
 import { POST_COUNT_PER_FETCH } from "@/constants/post";
 
-const mockPosts = postFactory.buildList(5 * POST_COUNT_PER_FETCH);
+const mockTotal = 5 * POST_COUNT_PER_FETCH;
+const mockPosts = postFactory.buildList(POST_COUNT_PER_FETCH);
 
 jest.mock("@/repositories/postRepository", () =>
   jest.fn().mockImplementation(() => ({
     fetchPosts() {
-      return mockPosts;
+      return { posts: mockPosts, total: mockTotal };
     },
   })),
 );
 
+async function renderComponent(): Promise<void> {
+  render(<PageNavigation />, {});
+
+  await postStore.fetchPosts();
+}
+
 describe("PageNavigation", () => {
   describe("컴포넌트가 렌더되면", () => {
-    beforeEach(() => {
-      render(<PageNavigation />, {});
-
-      postStore.fetchPosts();
+    beforeEach(async () => {
+      await renderComponent();
     });
 
     it("페이지 네비게이션을 확인할 수 있다.", () => {
@@ -31,9 +36,7 @@ describe("PageNavigation", () => {
 
   describe("글 목록의 이전 페이지가 존재하면", () => {
     beforeEach(async () => {
-      render(<PageNavigation />, {});
-
-      await postStore.fetchPosts();
+      await renderComponent();
       postStore.setPage(2);
     });
 
@@ -50,9 +53,7 @@ describe("PageNavigation", () => {
 
   describe("글 목록의 다음 페이지가 존재하면", () => {
     beforeEach(async () => {
-      render(<PageNavigation />, {});
-
-      await postStore.fetchPosts();
+      await renderComponent();
       postStore.setPage(2);
     });
 
@@ -69,9 +70,7 @@ describe("PageNavigation", () => {
 
   describe("글 목록의 이전 페이지가 존재하지 않으면", () => {
     beforeEach(async () => {
-      render(<PageNavigation />, {});
-
-      await postStore.fetchPosts();
+      await renderComponent();
       postStore.setPage(0);
     });
 
