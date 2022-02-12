@@ -1,44 +1,44 @@
-import Post, { PostInitializer } from "@/models/post";
+import Post from "@/models/Post";
 
-import markdownLoader from "@/libs/FileLoader/MarkdownLoader";
+import postLoader from "@/libs/FileLoader/PostLoader";
 import MetaDataExtractor from "@/libs/Extractor/MetaDataExtractor";
 import MetaDataParser from "@/libs/Parser/MetaDataParser";
-import ObjectComparator from "@/libs/Comparator/ObjectComparator";
-import Validator from "@/libs/Validator/Validator";
-import { isNotEmpty } from "@/libs/Validator/validations/util";
-import {
-  isFixedDateFormat,
-  isFixedFileName,
-} from "@/libs/Validator/validations/post";
+
+type FetchPostsResponse = {
+  posts: Post[];
+  total: number;
+};
+
+type PaginationArgs = {
+  offset: number;
+  limit: number;
+};
 
 class PostRepository {
-  async fetchPosts(): Promise<Post[]> {
-    const files = await markdownLoader.findAll();
+  async fetchPosts({
+    offset,
+    limit,
+  }: PaginationArgs): Promise<FetchPostsResponse> {
+    const { files, total } = await postLoader
+      .orderByDate()
+      .paginate(offset, limit)
+      .getMany();
 
     const extractor = new MetaDataExtractor();
     const parser = new MetaDataParser();
-    const comparator = new ObjectComparator();
 
-    const posts = files.map(({ fileName, data }) => {
-      const metaData = parser.toObject(extractor.extract(data));
-      const postData = { id: fileName, ...metaData } as PostInitializer;
+    const posts = files
+      .map(({ fileName, data }) => {
+        try {
+          const metaData = parser.parse(extractor.extract(data));
+          return Post.makeInstance({ id: fileName, ...metaData });
+        } catch (e) {
+          return null;
+        }
+      })
+      .filter((post): post is Post => post != null);
 
-      const post = new Post(postData);
-
-      comparator.compare(post, metaData);
-
-      new Validator(post).validate({
-        id: [isFixedFileName],
-        title: [isNotEmpty],
-        description: [isNotEmpty],
-        category: [],
-        createdAt: [isFixedDateFormat],
-      });
-
-      return post;
-    });
-
-    return posts;
+    return { posts, total };
   }
 }
 
