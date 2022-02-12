@@ -1,46 +1,31 @@
 import FileNameExtractor from "../Extractor/FileNameExtractor";
 
-type FileData = {
+export type FileData = {
   fileName: string;
   data: string;
 };
 
 class FileLoader {
-  constructor(private readonly context: __WebpackModuleApi.RequireContext) {}
+  constructor(protected readonly context: __WebpackModuleApi.RequireContext) {}
 
-  private async getText(originalPath: string): Promise<string> {
+  private async getData(path: string): Promise<string> {
+    const originalPath = this.context(path);
+
     return fetch(originalPath).then((res) => res.text());
   }
 
-  async find(fileName: string): Promise<string> {
-    const extractor = new FileNameExtractor();
+  async load(path: string): Promise<FileData> {
+    const fileName = new FileNameExtractor().extract(path);
 
-    const found = this.context
-      .keys()
-      .find((path) => extractor.extract(path) === fileName);
+    const data = await this.getData(path);
 
-    if (!found) {
-      throw new Error(`${fileName} file not found.`);
-    }
-
-    const originalPath = this.context(found);
-
-    return this.getText(originalPath);
+    return { fileName, data };
   }
 
-  async findAll(): Promise<FileData[]> {
-    const extractor = new FileNameExtractor();
+  async loadAll(paths: string[]): Promise<FileData[]> {
+    const files = await Promise.all(paths.map((path) => this.load(path)));
 
-    const fileDataList: FileData[] = await Promise.all(
-      this.context.keys().map(async (path) => {
-        const data = await this.getText(this.context(path));
-        const fileName = extractor.extract(path);
-
-        return { fileName, data };
-      }),
-    );
-
-    return fileDataList;
+    return files;
   }
 }
 
