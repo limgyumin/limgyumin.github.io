@@ -8,13 +8,13 @@ import postStore from "@/stores/postStore";
 import { POST_COUNT_PER_FETCH } from "@/constants/post";
 
 function PageNavigation(): ReactElement | null {
-  const { totalCount, page, setPage } = postStore;
+  const { total, page, setPage } = postStore;
 
-  if (totalCount === null) {
+  if (total === null) {
     return null;
   }
 
-  const maxPage = Math.ceil(totalCount / POST_COUNT_PER_FETCH);
+  const maxPage = Math.ceil(total / POST_COUNT_PER_FETCH);
 
   const pageNumbers = [...Array(maxPage)].map((_, index) => index + 1);
 

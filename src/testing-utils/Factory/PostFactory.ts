@@ -2,7 +2,7 @@ import faker from "faker";
 
 import Factory from "./Factory";
 
-import Post from "@/models/post";
+import Post from "@/models/Post";
 
 const postFactory = new Factory<Post>({
   id: () => faker.random.alphaNumeric(7),
