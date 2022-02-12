@@ -1,14 +1,34 @@
-import { State, Validations } from "./types";
+export enum State {
+  Success = "success",
+  Failure = "failure",
+}
 
-class Validator<T extends object> {
-  constructor(private readonly object: T) {}
+type Success = {
+  state: State.Success;
+};
 
-  validate(validations: Validations<T>) {
-    const keys = Object.keys(validations) as (keyof T)[];
+type Failure = {
+  state: State.Failure;
+  reason: string;
+};
+
+type ValidationResult = Success | Failure;
+
+export type Validation<T> = (value: T) => ValidationResult;
+
+export type Validations<T> = {
+  [K in keyof T]: Validation<T[K]>[];
+};
+
+class BaseValidator<T extends object> {
+  constructor(private readonly validations: Validations<T>) {}
+
+  validate(object: T): void {
+    const keys = Object.keys(this.validations) as (keyof T)[];
 
     keys.forEach((key) => {
-      validations[key].forEach((validation) => {
-        const result = validation(this.object[key]);
+      this.validations[key].forEach((validation) => {
+        const result = validation(object[key]);
 
         if (result.state === State.Failure) {
           throw new Error(result.reason);
@@ -18,4 +38,4 @@ class Validator<T extends object> {
   }
 }
 
-export default Validator;
+export default BaseValidator;

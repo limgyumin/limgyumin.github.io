@@ -1,8 +1,5 @@
 import Extractor from "./Extractor";
 
-import Validator from "../Validator/Validator";
-import { isMetaData } from "../Validator/validations/post";
-
 class MetaDataExtractor implements Extractor {
   extract(value: string): string {
     const regExp = /(---\n)(.*?)(\n---)/ms;
@@ -13,8 +10,6 @@ class MetaDataExtractor implements Extractor {
     }
 
     const [, , metaData] = matched;
-
-    new Validator({ metaData }).validate({ metaData: [isMetaData] });
 
     return metaData;
   }
