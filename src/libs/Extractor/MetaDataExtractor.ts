@@ -1,12 +1,12 @@
 import Extractor from "./Extractor";
 
 class MetaDataExtractor implements Extractor {
-  extract(value: string): string {
+  extract(content: string): string {
     const regExp = /(---\n)(.*?)(\n---)/ms;
-    const matched = value.match(regExp);
+    const matched = content.match(regExp);
 
     if (!matched) {
-      throw new Error(`${value} has no matching result.`);
+      throw new Error(`${content} has no matching result.`);
     }
 
     const [, , metaData] = matched;
