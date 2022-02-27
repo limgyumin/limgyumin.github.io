@@ -11,8 +11,10 @@ class Page<T> {
     return this;
   }
 
-  take(limit: number): T[] {
-    return this.paginated.slice(0, limit);
+  take(limit: number): { list: T[]; total: number } {
+    const taken = this.paginated.slice(0, limit);
+
+    return { list: taken, total: this.list.length };
   }
 }
 
