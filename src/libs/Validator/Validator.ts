@@ -20,10 +20,10 @@ export type Validations<T> = {
   [K in keyof T]: Validation<T[K]>[];
 };
 
-class BaseValidator<T extends object> {
+class Validator<T extends object> {
   constructor(private readonly validations: Validations<T>) {}
 
-  validate(object: T): void {
+  validate(object: T): T {
     const keys = Object.keys(this.validations) as (keyof T)[];
 
     keys.forEach((key) => {
@@ -35,7 +35,9 @@ class BaseValidator<T extends object> {
         }
       });
     });
+
+    return object;
   }
 }
 
-export default BaseValidator;
+export default Validator;
