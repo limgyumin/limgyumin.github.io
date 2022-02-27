@@ -1,5 +1,5 @@
 interface Extractor {
-  extract(value: string): string;
+  extract(content: string): string | string[];
 }
 
 export default Extractor;
