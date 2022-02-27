@@ -1,7 +1,7 @@
 import Page from "@/utils/page";
 import Sort, { OrderMethod } from "@/utils/sort";
 
-class ListFilter<T extends object> {
+class List<T extends object> {
   private total: number = 0;
 
   constructor(private list: T[] = []) {}
@@ -44,4 +44,4 @@ class ListFilter<T extends object> {
   }
 }
 
-export default ListFilter;
+export default List;

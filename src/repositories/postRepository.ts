@@ -1,7 +1,7 @@
 import { PostInitializer } from "@/models/Post";
 import { PostDetailInitializer } from "@/models/PostDetail";
 
-import ListFilter from "@/utils/list";
+import List from "@/utils/list";
 import postLoader from "@/libs/Loader/PostLoader";
 
 type FetchPostsResponse = {
@@ -21,7 +21,7 @@ class PostRepository {
   }: PaginationArgs): Promise<FetchPostsResponse> {
     const posts = await postLoader.loadAll();
 
-    const { list, total } = new ListFilter(posts)
+    const { list, total } = new List(posts)
       .orderBy("createdAt", "DESC")
       .paginate(offset, limit)
       .getMany();
