@@ -1,5 +1,3 @@
-import postValidator from "@/libs/Validator/PostValidator";
-
 export type PostInitializer = {
   id: string;
   title: string;
@@ -9,11 +7,11 @@ export type PostInitializer = {
 };
 
 class Post {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  createdAt: string;
+  readonly id: string;
+  readonly title: string;
+  readonly description: string;
+  readonly category: string;
+  readonly createdAt: string;
 
   constructor(post: PostInitializer) {
     this.id = post.id;
@@ -24,11 +22,7 @@ class Post {
   }
 
   static makeInstance(post: PostInitializer): Post {
-    const instance = new Post(post);
-
-    postValidator.validate(instance);
-
-    return instance;
+    return new Post(post);
   }
 }
 
