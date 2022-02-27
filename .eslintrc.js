@@ -40,6 +40,7 @@ module.exports = {
     "@typescript-eslint/no-empty-interface": 0,
     "react/require-default-props": 0,
     "react/jsx-filename-extension": 0,
+    "react/jsx-props-no-spreading": 0,
     "react/function-component-definition": 0,
     "react-hooks/exhaustive-deps": 0,
   },
