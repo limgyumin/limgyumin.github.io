@@ -25,13 +25,16 @@ class PostStore {
   }
 
   async fetchPosts(): Promise<void> {
+    this.posts = null;
+    this.total = null;
+
     const { posts, total } = await this.postRepository.fetchPosts({
       offset: this.page * POST_COUNT_PER_FETCH,
       limit: POST_COUNT_PER_FETCH,
     });
 
     runInAction(() => {
-      this.posts = posts;
+      this.posts = posts.map(Post.makeInstance);
       this.total = total;
     });
   }
