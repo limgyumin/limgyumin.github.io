@@ -1,18 +1,14 @@
-import Post from "@/models/Post";
+import { PostInitializer } from "@/models/Post";
+import { isNotEmpty } from "./validations";
 
-import BaseValidator from "./Validator";
-import {
-  isFixedDateFormat,
-  isFixedFileName,
-} from "@/libs/Validator/validations/post";
-import { isNotEmpty } from "@/libs/Validator/validations/util";
+import Validator from "./Validator";
 
-const postValidator = new BaseValidator<Post>({
-  id: [isFixedFileName],
+const postValidator = new Validator<PostInitializer>({
+  id: [isNotEmpty],
   title: [isNotEmpty],
   description: [isNotEmpty],
   category: [],
-  createdAt: [isFixedDateFormat],
+  createdAt: [isNotEmpty],
 });
 
 export default postValidator;
