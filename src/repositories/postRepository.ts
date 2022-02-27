@@ -1,11 +1,11 @@
-import Post from "@/models/Post";
+import { PostInitializer } from "@/models/Post";
+import { PostDetailInitializer } from "@/models/PostDetail";
 
-import postLoader from "@/libs/FileLoader/PostLoader";
-import MetaDataExtractor from "@/libs/Extractor/MetaDataExtractor";
-import MetaDataParser from "@/libs/Parser/MetaDataParser";
+import ListFilter from "@/utils/list";
+import postLoader from "@/libs/Loader/PostLoader";
 
 type FetchPostsResponse = {
-  posts: Post[];
+  posts: PostInitializer[];
   total: number;
 };
 
@@ -19,26 +19,20 @@ class PostRepository {
     offset,
     limit,
   }: PaginationArgs): Promise<FetchPostsResponse> {
-    const { files, total } = await postLoader
-      .orderByDate()
+    const posts = await postLoader.loadAll();
+
+    const { list, total } = new ListFilter(posts)
+      .orderBy("createdAt", "DESC")
       .paginate(offset, limit)
       .getMany();
 
-    const extractor = new MetaDataExtractor();
-    const parser = new MetaDataParser();
+    return { posts: list, total };
+  }
 
-    const posts = files
-      .map(({ fileName, data }) => {
-        try {
-          const metaData = parser.parse(extractor.extract(data));
-          return Post.makeInstance({ id: fileName, ...metaData });
-        } catch (e) {
-          return null;
-        }
-      })
-      .filter((post): post is Post => post != null);
+  async fetchPostDetail(id: string): Promise<PostDetailInitializer> {
+    const post = await postLoader.loadOne(id);
 
-    return { posts, total };
+    return post;
   }
 }
 
