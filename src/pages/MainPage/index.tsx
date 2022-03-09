@@ -1,37 +1,29 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { observer } from "mobx-react";
-import styled from "styled-components";
 
+import Template from "@/components/common/Template";
 import PostList from "@/components/PostList";
 import PageNavigation from "@/components/PageNavigation";
+import LoadingIndicator from "@/components/common/molecules/LoadingIndicator";
 
 import usePosts from "@/hooks/usePosts";
+import postStore from "@/stores/postStore";
 
-function MainPage(): ReactElement {
+const MainPage: React.FC = () => {
   usePosts();
 
+  const { posts } = postStore;
+
+  if (posts === null) {
+    return <LoadingIndicator />;
+  }
+
   return (
-    <Container>
-      <Wrapper>
-        <PostList />
-        <PageNavigation />
-      </Wrapper>
-    </Container>
+    <Template as="main">
+      <PostList />
+      <PageNavigation />
+    </Template>
   );
-}
-
-const Container = styled.div`
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
-const Wrapper = styled.div`
-  max-width: 1000px;
-  width: inherit;
-  margin: 0 1rem;
-  padding: 2rem 0 4rem;
-`;
+};
 
 export default observer(MainPage);
