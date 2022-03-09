@@ -1,9 +1,12 @@
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 
 import PostList from ".";
 import postStore from "@/stores/postStore";
+
 import { render, screen } from "@/testing-utils";
 import postFactory from "@/testing-utils/Factory/PostFactory";
+
 import { POST_COUNT_PER_FETCH } from "@/constants/post";
 
 const mockTotal = 5 * POST_COUNT_PER_FETCH;
@@ -20,7 +23,12 @@ jest.mock("@/repositories/postRepository", () =>
 describe("PostList", () => {
   describe("컴포넌트가 렌더되면", () => {
     beforeEach(() => {
-      render(<PostList />, {});
+      render(
+        <MemoryRouter>
+          <PostList />
+        </MemoryRouter>,
+        {},
+      );
 
       postStore.fetchPosts();
     });

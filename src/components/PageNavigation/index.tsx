@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import styled, { css } from "styled-components";
 
@@ -7,7 +7,7 @@ import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import postStore from "@/stores/postStore";
 import { POST_COUNT_PER_FETCH } from "@/constants/post";
 
-function PageNavigation(): ReactElement | null {
+const PageNavigation: React.FC = () => {
   const { total, page, setPage } = postStore;
 
   if (total === null) {
@@ -33,9 +33,7 @@ function PageNavigation(): ReactElement | null {
     }
   };
 
-  const handleSetPage = (page: number) => () => {
-    setPage(page);
-  };
+  const handleSetPage = (page: number) => () => setPage(page);
 
   return (
     <Container data-testid="page-navigation">
@@ -66,7 +64,7 @@ function PageNavigation(): ReactElement | null {
       </ArrowButton>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   display: flex;

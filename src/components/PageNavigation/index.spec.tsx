@@ -17,11 +17,11 @@ jest.mock("@/repositories/postRepository", () =>
   })),
 );
 
-async function renderComponent(): Promise<void> {
+const renderComponent = async (): Promise<void> => {
   render(<PageNavigation />, {});
 
   await postStore.fetchPosts();
-}
+};
 
 describe("PageNavigation", () => {
   describe("컴포넌트가 렌더되면", () => {

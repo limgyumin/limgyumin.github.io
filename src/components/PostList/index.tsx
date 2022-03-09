@@ -1,17 +1,16 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 
 import postStore from "@/stores/postStore";
 
 import PostItem from "./PostItem";
-import LoadingIndicator from "../common/LoadingIndicator";
 
-function PostList(): ReactElement {
+const PostList: React.FC = () => {
   const { posts } = postStore;
 
   if (posts === null) {
-    return <LoadingIndicator />;
+    return null;
   }
 
   return (
@@ -21,10 +20,10 @@ function PostList(): ReactElement {
       ))}
     </Container>
   );
-}
+};
 
 const Container = styled.ul`
-  padding: 5rem 0 2rem;
+  padding-bottom: 2rem;
 
   & > * + * {
     margin-top: 1.5rem;

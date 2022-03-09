@@ -1,6 +1,8 @@
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 
 import PostItem from ".";
+
 import { render, screen } from "@/testing-utils";
 import postFactory from "@/testing-utils/Factory/PostFactory";
 
@@ -9,7 +11,12 @@ describe("PostItem", () => {
     beforeEach(() => {
       const post = postFactory.build();
 
-      render(<PostItem post={post} />, {});
+      render(
+        <MemoryRouter>
+          <PostItem post={post} />
+        </MemoryRouter>,
+        {},
+      );
     });
 
     it("제목을 확인할 수 있어야 한다.", () => {
