@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { FulfillingSquareSpinner } from "react-epic-spinners";
 import styled from "styled-components";
 
 import { theme } from "@/styles/theme";
 
-function LoadingIndicator(): ReactElement {
+const LoadingIndicator: React.FC = () => {
   const color = theme.colors.bgBlack;
 
   return (
@@ -16,7 +16,7 @@ function LoadingIndicator(): ReactElement {
       />
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   width: 100%;

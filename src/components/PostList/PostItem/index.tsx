@@ -1,4 +1,5 @@
-import React, { ReactElement } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Post from "@/models/Post";
@@ -8,13 +9,17 @@ type Props = {
   post: Post;
 };
 
-function PostItem({ post }: Props): ReactElement {
-  const { title, description, category, createdAt } = post;
+const PostItem: React.FC<Props> = ({ post }) => {
+  const navigate = useNavigate();
+
+  const { id, title, description, category, createdAt } = post;
 
   const formattedCreatedAt = new DateFormatter(createdAt).format();
 
+  const handleClick = () => navigate(`/post/${id}`);
+
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <Header>
         <Category data-testid="post-category">
           {category.toUpperCase()}
@@ -25,7 +30,7 @@ function PostItem({ post }: Props): ReactElement {
       <Description data-testid="post-description">{description}</Description>
     </Container>
   );
-}
+};
 
 const Header = styled.div`
   display: flex;
@@ -54,6 +59,10 @@ const Title = styled.h2`
   font-weight: 600;
   margin: 0.7rem 0 0.5rem;
   color: ${({ theme }) => theme.colors.ftBlack};
+
+  ${({ theme }) => theme.medias.tablet} {
+    font-size: 1.375rem;
+  }
 `;
 
 const Description = styled.p`
