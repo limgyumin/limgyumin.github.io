@@ -20,8 +20,8 @@ class MetaDataTransformer {
   transform(content: string): MetaData {
     const metaDataStr = this.extractor.extract(content);
 
-    const regExp = /(\w+):\s?(.+)/gm;
-    const matchedList = [...metaDataStr.matchAll(regExp)];
+    const includeMetaDataLine = /(\w+):\s?(.+)/gm;
+    const matchedList = [...metaDataStr.matchAll(includeMetaDataLine)];
 
     const metaData = matchedList.reduce((acc, matched) => {
       const [, key, value] = matched;

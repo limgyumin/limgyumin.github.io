@@ -2,9 +2,9 @@ import Extractor from "./Extractor";
 
 class FileNameExtractor implements Extractor {
   extract(path: string): string {
-    const regExp = /^\.\/([a-zA-Z_/]+)?|\.[a-z]+$/gm;
+    const excludePathAndExtension = /^\.\/([a-zA-Z_/]+\/)?|\.[a-z]+$/gm;
 
-    return path.replace(regExp, "");
+    return path.replace(excludePathAndExtension, "");
   }
 }
 
