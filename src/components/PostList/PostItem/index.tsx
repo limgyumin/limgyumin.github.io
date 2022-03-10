@@ -21,13 +21,17 @@ const PostItem: React.FC<Props> = ({ post }) => {
   return (
     <Container onClick={handleClick}>
       <Header>
-        <Category data-testid="post-category">
-          {category.toUpperCase()}
-        </Category>
+        {category && (
+          <Category data-testid="post-category">
+            {category.toUpperCase()}
+          </Category>
+        )}
         <Date data-testid="post-date">{formattedCreatedAt}</Date>
       </Header>
       <Title data-testid="post-title">{title}</Title>
-      <Description data-testid="post-description">{description}</Description>
+      {description && (
+        <Description data-testid="post-description">{description}</Description>
+      )}
     </Container>
   );
 };
@@ -57,7 +61,7 @@ const Date = styled.p`
 const Title = styled.h2`
   font-size: 1.625rem;
   font-weight: 600;
-  margin: 0.7rem 0 0.5rem;
+  margin-top: 0.7rem;
   color: ${({ theme }) => theme.colors.ftBlack};
 
   ${({ theme }) => theme.medias.tablet} {
@@ -66,6 +70,7 @@ const Title = styled.h2`
 `;
 
 const Description = styled.p`
+  margin-top: 0.5rem;
   font-size: 1rem;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.ftBlack};

@@ -19,9 +19,11 @@ const PostDetailHeader: React.FC = () => {
 
   return (
     <Container>
-      <Category data-testid="post-header-category">
-        {category.toUpperCase()}
-      </Category>
+      {category && (
+        <Category data-testid="post-header-category">
+          {category.toUpperCase()}
+        </Category>
+      )}
       <Title data-testid="post-header-title">{title}</Title>
       <Date data-testid="post-header-created-at">
         <RiCalendar2Fill />
@@ -39,7 +41,7 @@ const Container = styled.section`
 `;
 
 const Category = styled.span`
-  margin-right: 0.75rem;
+  margin: 0 0.75rem 1.8rem 0;
   padding: 0.4rem 0.75rem;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -50,7 +52,7 @@ const Category = styled.span`
 `;
 
 const Title = styled.h1`
-  margin: 1.8rem 0 1.4rem;
+  margin-bottom: 1.4rem;
   font-weight: 700;
   font-size: 3.125rem;
   line-height: 1.2;
