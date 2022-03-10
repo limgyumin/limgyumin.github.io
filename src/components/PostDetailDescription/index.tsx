@@ -14,6 +14,10 @@ const PostDetailDescription: React.FC = () => {
 
   const { description } = postDetail;
 
+  if (!description) {
+    return null;
+  }
+
   return (
     <Container data-testid="post-description">
       <IconWrapper>

@@ -6,7 +6,7 @@ import Validator from "./Validator";
 const postValidator = new Validator<PostInitializer>({
   id: [isNotEmpty],
   title: [isNotEmpty],
-  description: [isNotEmpty],
+  description: [],
   category: [],
   createdAt: [isNotEmpty],
 });
