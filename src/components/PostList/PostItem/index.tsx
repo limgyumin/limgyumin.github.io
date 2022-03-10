@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Post from "@/models/Post";
-import DateFormatter from "@/utils/date";
+import DateUtil from "@/utils/date";
 
 type Props = {
   post: Post;
@@ -14,7 +14,7 @@ const PostItem: React.FC<Props> = ({ post }) => {
 
   const { id, title, description, category, createdAt } = post;
 
-  const formattedCreatedAt = new DateFormatter(createdAt).format();
+  const formattedCreatedAt = new DateUtil(createdAt).format();
 
   const handleClick = () => navigate(`/post/${id}`);
 

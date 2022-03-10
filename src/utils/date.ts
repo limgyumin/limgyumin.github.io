@@ -7,7 +7,7 @@ dayjs.extend(LocalizedFormat);
 
 const FORMAT_YYYY_MM_DD = "LL";
 
-class DateFormatter {
+class DateUtil {
   constructor(private readonly date: string) {}
 
   format(): string {
@@ -15,4 +15,4 @@ class DateFormatter {
   }
 }
 
-export default DateFormatter;
+export default DateUtil;
