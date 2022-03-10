@@ -6,10 +6,10 @@ import { PostDetailInitializer } from "@/models/PostDetail";
 const postDetailValidator = new Validator<PostDetailInitializer>({
   id: [isNotEmpty],
   title: [isNotEmpty],
-  description: [isNotEmpty],
+  description: [],
   category: [],
   createdAt: [isNotEmpty],
-  article: [],
+  article: [isNotEmpty],
 });
 
 export default postDetailValidator;
