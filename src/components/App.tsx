@@ -1,14 +1,20 @@
-import React, { ReactElement } from "react";
-import { Routes, Route } from "react-router-dom";
+import React from "react";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import * as Pages from "@/pages";
 
-function App(): ReactElement {
+import Header from "./Header";
+
+const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Pages.Main />} />
-    </Routes>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Pages.Main />} />
+        <Route path="/post/:id" element={<Pages.PostDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
