@@ -6,14 +6,14 @@ import { POST_COUNT_PER_FETCH } from "@/constants/post";
 
 class PostStore {
   posts: Post[] | null = null;
-  page: number = 0;
   total: number | null = null;
+  page: number = 0;
 
-  constructor(private readonly postRepository: PostRepository) {
+  constructor() {
     makeObservable(this, {
       posts: observable,
-      page: observable,
       total: observable,
+      page: observable,
 
       setPage: action.bound,
       fetchPosts: action.bound,
@@ -28,7 +28,7 @@ class PostStore {
     this.posts = null;
     this.total = null;
 
-    const { posts, total } = await this.postRepository.fetchPosts({
+    const { posts, total } = await new PostRepository().fetchPosts({
       offset: this.page * POST_COUNT_PER_FETCH,
       limit: POST_COUNT_PER_FETCH,
     });
@@ -40,4 +40,4 @@ class PostStore {
   }
 }
 
-export default new PostStore(new PostRepository());
+export default new PostStore();

@@ -15,10 +15,8 @@ const initializer: MetaData = {
 };
 
 class MetaDataTransformer {
-  constructor(private readonly extractor: MetaDataExtractor) {}
-
   transform(content: string): MetaData {
-    const metaDataStr = this.extractor.extract(content);
+    const metaDataStr = new MetaDataExtractor().extract(content);
 
     const includeMetaDataLine = /(\w+):\s?(.+)/gm;
     const matchedList = [...metaDataStr.matchAll(includeMetaDataLine)];
