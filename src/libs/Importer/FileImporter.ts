@@ -6,24 +6,23 @@ export type FileData = {
 };
 
 class FileImporter {
-  constructor(
-    private readonly context: __WebpackModuleApi.RequireContext,
-    private readonly extractor: FileNameExtractor = new FileNameExtractor(),
-  ) {}
+  constructor(private readonly context: __WebpackModuleApi.RequireContext) {}
 
   private async getData(path: string): Promise<FileData> {
     const originalPath = this.context(path);
 
-    const fileName = this.extractor.extract(path);
+    const fileName = new FileNameExtractor().extract(path);
     const data = await fetch(originalPath).then((res) => res.text());
 
     return { fileName, data };
   }
 
   async import(id: string): Promise<FileData> {
+    const extractor = new FileNameExtractor();
+
     const found = this.context
       .keys()
-      .find((path) => this.extractor.extract(path) === id);
+      .find((path) => extractor.extract(path) === id);
 
     if (!found) {
       throw new Error(`File ${id} not found.`);

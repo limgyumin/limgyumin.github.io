@@ -1,9 +1,8 @@
-import FileImporter from "../Importer/FileImporter";
+import postImporter from "../Importer/PostImporter";
 
 import { PostInitializer } from "@/models/Post";
 import { PostDetailInitializer } from "@/models/PostDetail";
 
-import MetaDataExtractor from "../Extractor/MetaDataExtractor";
 import ArticleExtractor from "../Extractor/ArticleExtractor";
 
 import postValidator from "../Validator/PostValidator";
@@ -13,14 +12,10 @@ import MetaDataTransformer from "../Transformer/MetaDataTransformer";
 class PostLoader {
   private static list: PostInitializer[] | null = null;
 
-  constructor(private readonly importer: FileImporter) {}
-
   async loadOne(id: string): Promise<PostDetailInitializer> {
-    const fileData = await this.importer.import(id);
+    const fileData = await postImporter.import(id);
 
-    const metaData = new MetaDataTransformer(new MetaDataExtractor()).transform(
-      fileData.data,
-    );
+    const metaData = new MetaDataTransformer().transform(fileData.data);
     const article = new ArticleExtractor().extract(fileData.data);
 
     return postDetailValidator.validate({
@@ -35,9 +30,9 @@ class PostLoader {
       return PostLoader.list;
     }
 
-    const files = await this.importer.importAll();
+    const files = await postImporter.importAll();
 
-    const transformer = new MetaDataTransformer(new MetaDataExtractor());
+    const transformer = new MetaDataTransformer();
 
     const posts = files.map(({ fileName, data }) => {
       const metaData = transformer.transform(data);
@@ -50,6 +45,4 @@ class PostLoader {
   }
 }
 
-const postContext = require.context("/_posts", false, /.md$/);
-
-export default new PostLoader(new FileImporter(postContext));
+export default new PostLoader();
