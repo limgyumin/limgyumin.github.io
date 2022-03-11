@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { HashLink } from "react-router-hash-link";
 
 import { Heading } from "..";
-import { spaceToHyphen } from "@/utils/space";
+import { removeSpecialSymbols, space2Hyphen } from "@/utils/string";
 
 type Props = {
   heading: Heading;
@@ -13,7 +13,7 @@ type Props = {
 const HeadingItem: React.FC<Props> = ({ heading, active }) => {
   const { content, scale } = heading;
 
-  const hashLinkPath = `#${spaceToHyphen(content)}`;
+  const hashLinkPath = `#${space2Hyphen(removeSpecialSymbols(content)).trim()}`;
 
   return (
     <Item>
