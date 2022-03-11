@@ -4,34 +4,37 @@ import styled from "styled-components";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { prism } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
-import { spaceToHyphen } from "@/utils/space";
+import { removeSpecialSymbols, space2Hyphen } from "@/utils/string";
 
 type Props = {
   children: string;
 };
 
+const string2Id = (str: string) =>
+  space2Hyphen(removeSpecialSymbols(str)).trim();
+
 const CustomH1 = ({ children }: { children: string }): JSX.Element => {
-  return <h1 id={spaceToHyphen(children.toString())}>{children}</h1>;
+  return <h1 id={string2Id(children.toString())}>{children}</h1>;
 };
 
 const CustomH2 = ({ children }: { children: string }): JSX.Element => {
-  return <h2 id={spaceToHyphen(children.toString())}>{children}</h2>;
+  return <h2 id={string2Id(children.toString())}>{children}</h2>;
 };
 
 const CustomH3 = ({ children }: { children: string }): JSX.Element => {
-  return <h3 id={spaceToHyphen(children.toString())}>{children}</h3>;
+  return <h3 id={string2Id(children.toString())}>{children}</h3>;
 };
 
 const CustomH4 = ({ children }: { children: string }): JSX.Element => {
-  return <h4 id={spaceToHyphen(children.toString())}>{children}</h4>;
+  return <h4 id={string2Id(children.toString())}>{children}</h4>;
 };
 
 const CustomH5 = ({ children }: { children: string }): JSX.Element => {
-  return <h5 id={spaceToHyphen(children.toString())}>{children}</h5>;
+  return <h5 id={string2Id(children.toString())}>{children}</h5>;
 };
 
 const CustomH6 = ({ children }: { children: string }): JSX.Element => {
-  return <h6 id={spaceToHyphen(children.toString())}>{children}</h6>;
+  return <h6 id={string2Id(children.toString())}>{children}</h6>;
 };
 
 const CustomAnchor = ({
