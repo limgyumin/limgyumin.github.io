@@ -1,10 +1,12 @@
 class Page<T> {
   private paginated: T[] = [];
 
-  constructor(private readonly list: T[]) {}
+  constructor(private readonly list: T[]) {
+    this.paginated = [...list];
+  }
 
   skip(offset: number): this {
-    const sliced = this.list.slice(offset);
+    const sliced = this.paginated.slice(offset);
 
     this.paginated = sliced;
 
