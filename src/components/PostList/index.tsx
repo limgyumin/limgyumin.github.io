@@ -23,10 +23,18 @@ const PostList: React.FC = () => {
 };
 
 const Container = styled.ul`
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
 
   & > * + * {
     margin-top: 1.5rem;
+  }
+
+  ${({ theme }) => theme.medias.tablet} {
+    padding-bottom: 2rem;
+
+    & > * + * {
+      margin-top: 1rem;
+    }
   }
 `;
 
