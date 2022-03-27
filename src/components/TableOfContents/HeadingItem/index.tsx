@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo, useMemo } from "react";
 import styled, { css } from "styled-components";
 import { HashLink } from "react-router-hash-link";
 
+import StringUtil from "@/utils/string";
 import { Heading } from "..";
-import { removeSpecialSymbols, space2Hyphen } from "@/utils/string";
 
 type Props = {
   heading: Heading;
@@ -13,11 +13,20 @@ type Props = {
 const HeadingItem: React.FC<Props> = ({ heading, active }) => {
   const { content, scale } = heading;
 
-  const hashLinkPath = `#${space2Hyphen(removeSpecialSymbols(content)).trim()}`;
+  const id = useMemo<string>(
+    () => new StringUtil(content).space2Hyphen().removeSpecialSymbols().get(),
+    [content],
+  );
 
   return (
     <Item>
-      <StyledHashLink smooth to={hashLinkPath} $active={active} $scale={scale}>
+      <StyledHashLink
+        data-testid="heading-item"
+        smooth
+        to={`#${id}`}
+        $active={active}
+        $scale={scale}
+      >
         {content}
       </StyledHashLink>
     </Item>
@@ -38,9 +47,9 @@ const StyledHashLink = styled(HashLink)<{ $active: boolean; $scale: number }>`
   ${(props) =>
     props.$active &&
     css`
-      transform: scale(1.05, 1.05);
+      transform: scale(1.025, 1.025);
       color: ${({ theme }) => theme.colors.ftGrayDark3};
     `}
 `;
 
-export default HeadingItem;
+export default memo(HeadingItem);
