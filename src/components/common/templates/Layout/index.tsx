@@ -7,29 +7,35 @@ type Props = {
   children: ReactNode;
 };
 
-const Template: React.FC<Props> = ({
-  as = "section",
-  width = "900px",
+const Layout: React.FC<Props> = ({
+  as = "main",
+  width = "700px",
   children,
 }) => {
   return (
-    <Container as={as}>
-      <Wrapper $width={width}>{children}</Wrapper>
+    <Container>
+      <Wrapper as={as} $width={width}>
+        {children}
+      </Wrapper>
     </Container>
   );
 };
 
-const Container = styled.section`
+const Container = styled.div`
   width: 100%;
   min-height: 100%;
   display: flex;
   justify-content: center;
 `;
 
-const Wrapper = styled.div<{ $width: string }>`
+const Wrapper = styled.main<{ $width: string }>`
   max-width: ${(props) => props.$width};
   width: inherit;
-  padding: 6rem 1rem 4rem;
+  padding: 8rem 1rem 4rem;
+
+  ${({ theme }) => theme.medias.tablet} {
+    padding: 6rem 1rem 4rem;
+  }
 `;
 
-export default Template;
+export default Layout;
