@@ -28,7 +28,7 @@ const PostDetailDescription: React.FC = () => {
   );
 };
 
-const Container = styled.section`
+const Container = styled.div`
   display: flex;
   width: 100%;
   margin-bottom: 4.5rem;
@@ -37,6 +37,10 @@ const Container = styled.section`
   box-shadow: 0px 8px 16px 0px ${({ theme }) => theme.colors.boxShadow};
   border-radius: 8px;
   text-align: left;
+
+  ${({ theme }) => theme.medias.tablet} {
+    margin-bottom: 3rem;
+  }
 `;
 
 const Description = styled.p`
