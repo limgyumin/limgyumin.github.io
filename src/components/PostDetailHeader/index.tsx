@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 import { RiCalendar2Fill } from "react-icons/ri";
@@ -6,7 +6,7 @@ import { RiCalendar2Fill } from "react-icons/ri";
 import postDetailStore from "@/stores/postDetailStore";
 import DateUtil from "@/utils/date";
 
-const PostDetailHeader: React.FC = () => {
+const PostDetailHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const { postDetail } = postDetailStore;
 
   if (postDetail === null) {
@@ -18,7 +18,7 @@ const PostDetailHeader: React.FC = () => {
   const formattedCreatedAt = new DateUtil(createdAt).format();
 
   return (
-    <Container>
+    <Container ref={ref}>
       {category && (
         <Category data-testid="post-header-category">
           {category.toUpperCase()}
@@ -31,17 +31,21 @@ const PostDetailHeader: React.FC = () => {
       </Date>
     </Container>
   );
-};
+});
 
-const Container = styled.section`
+const Container = styled.div`
   width: 100%;
-  padding-top: 2rem;
-  margin-bottom: 3.5rem;
+  padding-bottom: 3.5rem;
   text-align: center;
+
+  ${({ theme }) => theme.medias.tablet} {
+    padding-bottom: 2.5rem;
+  }
 `;
 
 const Category = styled.span`
-  margin: 0 0.75rem 1.8rem 0;
+  display: inline-block;
+  margin-bottom: 1.375rem;
   padding: 0.4rem 0.75rem;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -52,7 +56,7 @@ const Category = styled.span`
 `;
 
 const Title = styled.h1`
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.375rem;
   font-weight: 700;
   font-size: 3.125rem;
   line-height: 1.2;
