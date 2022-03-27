@@ -8,9 +8,9 @@ import postDetailStore from "@/stores/postDetailStore";
 
 const mockPost = postDetailFactory.build();
 
-jest.mock("@/repositories/postRepository", () =>
+jest.mock("@/repositories/postDetailRepository", () =>
   jest.fn().mockImplementation(() => ({
-    fetchPostDetail() {
+    find() {
       return mockPost;
     },
   })),
@@ -23,7 +23,7 @@ describe("PostDetailDescription", () => {
     beforeEach(() => {
       render(<PostDetailDescription />, {});
 
-      postDetailStore.fetchPostDetail(postId);
+      postDetailStore.fetch(postId);
     });
 
     it("글의 설명 확인할 수 있어야 한다.", () => {

@@ -11,7 +11,7 @@ const mockPosts = postFactory.buildList(POST_COUNT_PER_FETCH);
 
 jest.mock("@/repositories/postRepository", () =>
   jest.fn().mockImplementation(() => ({
-    fetchPosts() {
+    find() {
       return { posts: mockPosts, total: mockTotal };
     },
   })),
@@ -20,7 +20,7 @@ jest.mock("@/repositories/postRepository", () =>
 const renderComponent = async (): Promise<void> => {
   render(<PageNavigation />, {});
 
-  await postStore.fetchPosts();
+  await postStore.fetch();
 };
 
 describe("PageNavigation", () => {

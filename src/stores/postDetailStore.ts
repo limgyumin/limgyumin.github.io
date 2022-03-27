@@ -1,6 +1,6 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 
-import PostRepository from "@/repositories/postRepository";
+import PostDetailRepository from "@/repositories/postDetailRepository";
 import PostDetail from "@/models/PostDetail";
 
 class PostDetailStore {
@@ -10,14 +10,14 @@ class PostDetailStore {
     makeObservable(this, {
       postDetail: observable,
 
-      fetchPostDetail: action.bound,
+      fetch: action.bound,
     });
   }
 
-  async fetchPostDetail(id: string): Promise<void> {
+  async fetch(id: string): Promise<void> {
     this.postDetail = null;
 
-    const post = await new PostRepository().fetchPostDetail(id);
+    const post = await new PostDetailRepository().find(id);
 
     runInAction(() => {
       this.postDetail = PostDetail.makeInstance(post);
