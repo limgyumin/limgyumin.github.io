@@ -1,5 +1,4 @@
 import { PostInitializer } from "@/models/Post";
-import { PostDetailInitializer } from "@/models/PostDetail";
 
 import List from "@/utils/list";
 import postLoader from "@/libs/Loader/PostLoader";
@@ -9,30 +8,27 @@ type FetchPostsResponse = {
   total: number;
 };
 
-type PaginationArgs = {
+type FetchPostsArgs = {
   offset: number;
   limit: number;
+  keyword: string;
 };
 
 class PostRepository {
-  async fetchPosts({
+  async find({
     offset,
     limit,
-  }: PaginationArgs): Promise<FetchPostsResponse> {
-    const posts = await postLoader.loadAll();
+    keyword,
+  }: FetchPostsArgs): Promise<FetchPostsResponse> {
+    const posts = await postLoader.load();
 
     const { list, total } = new List(posts)
+      .where("title", (v) => v.toLocaleLowerCase().includes(keyword))
       .orderBy("createdAt", "DESC")
       .paginate(offset, limit)
       .getMany();
 
     return { posts: list, total };
-  }
-
-  async fetchPostDetail(id: string): Promise<PostDetailInitializer> {
-    const post = await postLoader.loadOne(id);
-
-    return post;
   }
 }
 

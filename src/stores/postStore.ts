@@ -7,16 +7,20 @@ import { POST_COUNT_PER_FETCH } from "@/constants/post";
 class PostStore {
   posts: Post[] | null = null;
   total: number | null = null;
+
   page: number = 0;
+  keyword: string = "";
 
   constructor() {
     makeObservable(this, {
       posts: observable,
       total: observable,
       page: observable,
+      keyword: observable,
 
       setPage: action.bound,
-      fetchPosts: action.bound,
+      setKeyword: action.bound,
+      fetch: action.bound,
     });
   }
 
@@ -24,13 +28,18 @@ class PostStore {
     this.page = page;
   }
 
-  async fetchPosts(): Promise<void> {
+  setKeyword(keyword: string): void {
+    this.keyword = keyword.toLocaleLowerCase();
+  }
+
+  async fetch(): Promise<void> {
     this.posts = null;
     this.total = null;
 
-    const { posts, total } = await new PostRepository().fetchPosts({
+    const { posts, total } = await new PostRepository().find({
       offset: this.page * POST_COUNT_PER_FETCH,
       limit: POST_COUNT_PER_FETCH,
+      keyword: this.keyword,
     });
 
     runInAction(() => {

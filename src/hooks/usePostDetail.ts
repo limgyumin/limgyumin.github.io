@@ -6,13 +6,13 @@ import postDetailStore from "@/stores/postDetailStore";
 const usePostDetail = (): void => {
   const { id } = useParams();
 
-  const { fetchPostDetail } = postDetailStore;
+  const { fetch } = postDetailStore;
 
   useEffect(() => {
     if (id) {
-      fetchPostDetail(id);
+      fetch(id);
     }
-  }, []);
+  }, [id]);
 };
 
 export default usePostDetail;

@@ -14,7 +14,7 @@ const mockPosts = postFactory.buildList(POST_COUNT_PER_FETCH);
 
 jest.mock("@/repositories/postRepository", () =>
   jest.fn().mockImplementation(() => ({
-    fetchPosts() {
+    find() {
       return { posts: mockPosts, total: mockTotal };
     },
   })),
@@ -30,7 +30,7 @@ describe("PostList", () => {
         {},
       );
 
-      postStore.fetchPosts();
+      postStore.fetch();
     });
 
     it("글 목록을 확인할 수 있어야 한다.", () => {
