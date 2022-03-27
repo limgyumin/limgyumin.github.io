@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import Template from "@/components/common/Template";
+import Layout from "@/components/common/templates/Layout";
 import PostList from "@/components/PostList";
 import PageNavigation from "@/components/PageNavigation";
 import LoadingIndicator from "@/components/common/molecules/LoadingIndicator";
@@ -19,10 +19,10 @@ const MainPage: React.FC = () => {
   }
 
   return (
-    <Template as="main">
+    <Layout>
       <PostList />
       <PageNavigation />
-    </Template>
+    </Layout>
   );
 };
 

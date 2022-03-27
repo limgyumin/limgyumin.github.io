@@ -14,7 +14,11 @@ const PostDetailArticle = forwardRef<HTMLElement>((_, ref) => {
 
   const { article } = postDetail;
 
-  return <MarkDown ref={ref}>{article}</MarkDown>;
+  return (
+    <MarkDown as="article" ref={ref}>
+      {article}
+    </MarkDown>
+  );
 });
 
 export default observer(PostDetailArticle);
