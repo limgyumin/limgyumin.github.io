@@ -1,17 +1,18 @@
-import React, { forwardRef } from "react";
+import React, { ElementType, forwardRef } from "react";
 import MarkDown2JSX from "markdown-to-jsx";
 import styled from "styled-components";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { prism } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
-import { removeSpecialSymbols, space2Hyphen } from "@/utils/string";
+import StringUtil from "@/utils/string";
 
 type Props = {
+  as?: ElementType;
   children: string;
 };
 
 const string2Id = (str: string) =>
-  space2Hyphen(removeSpecialSymbols(str)).trim();
+  new StringUtil(str).space2Hyphen().removeSpecialSymbols().get();
 
 const CustomH1 = ({ children }: { children: string }): JSX.Element => {
   return <h1 id={string2Id(children.toString())}>{children}</h1>;
@@ -76,9 +77,9 @@ const CustomCodeblock = ({
   );
 };
 
-const MarkDown = forwardRef<HTMLElement, Props>(({ children }, ref) => {
+const MarkDown = forwardRef<HTMLElement, Props>(({ as, children }, ref) => {
   return (
-    <Container ref={ref} data-testid="markdown">
+    <Container as={as} ref={ref} data-testid="markdown">
       <MarkDown2JSX
         options={{
           overrides: {
@@ -100,7 +101,7 @@ const MarkDown = forwardRef<HTMLElement, Props>(({ children }, ref) => {
   );
 });
 
-const Container = styled.section`
+const Container = styled.div`
   font-size: 1.125rem;
   font-weight: 400;
   font-family: inherit;
@@ -159,7 +160,7 @@ const Container = styled.section`
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
 
     ${({ theme }) => theme.medias.tablet} {
       font-size: 2rem;

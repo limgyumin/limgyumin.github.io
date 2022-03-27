@@ -1,4 +1,21 @@
-export const space2Hyphen = (str: string): string => str.replace(/\s/g, "-");
+class StringUtil {
+  constructor(private value: string) {}
 
-export const removeSpecialSymbols = (str: string): string =>
-  str.replace(/[^ㄱ-힣a-zA-Z0-9-\s]+/g, "");
+  space2Hyphen(): this {
+    this.value = this.value.replace(/\s/g, "-");
+
+    return this;
+  }
+
+  removeSpecialSymbols(): this {
+    this.value = this.value.replace(/[^ㄱ-힣a-zA-Z0-9-\s]+/g, "");
+
+    return this;
+  }
+
+  get(): string {
+    return this.value;
+  }
+}
+
+export default StringUtil;
