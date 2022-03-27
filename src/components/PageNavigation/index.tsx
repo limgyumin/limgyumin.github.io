@@ -10,7 +10,7 @@ import { POST_COUNT_PER_FETCH } from "@/constants/post";
 const PageNavigation: React.FC = () => {
   const { total, page, setPage } = postStore;
 
-  if (total === null) {
+  if (!total) {
     return null;
   }
 
