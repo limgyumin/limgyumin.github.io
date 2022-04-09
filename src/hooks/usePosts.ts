@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import postStore from "@/stores/postStore";
 
 const usePosts = (): void => {
-  const { fetch, page, keyword } = postStore;
+  const { fetch, page } = postStore;
 
   useEffect(() => {
     fetch();
-  }, [page, keyword]);
+  }, [page]);
 };
 
 export default usePosts;
