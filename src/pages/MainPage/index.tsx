@@ -20,7 +20,7 @@ const MainPage: React.FC = () => {
 
   return (
     <Layout>
-      <PostList />
+      <PostList posts={posts} />
       <PageNavigation />
     </Layout>
   );
