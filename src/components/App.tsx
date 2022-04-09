@@ -12,6 +12,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Pages.Main />} />
         <Route path="/post/:id" element={<Pages.PostDetail />} />
+        <Route path="/search" element={<Pages.Search />} />
       </Routes>
     </BrowserRouter>
   );
