@@ -19,7 +19,7 @@ const ELEMENT_ATTRIBUTE_KEY = "data-id";
 
 const TableOfContents: React.FC<Props> = ({ article, fixed }) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
 
   const options: IntersectionObserverInit = {
     rootMargin: "0px 0px -70% 0px",
@@ -60,6 +60,12 @@ const TableOfContents: React.FC<Props> = ({ article, fixed }) => {
 
     return () => observer.disconnect();
   }, [article]);
+
+  useEffect(() => {
+    if (!fixed) {
+      setCurrentIndex(-1);
+    }
+  }, [fixed]);
 
   if (headings.length === 0) {
     return null;

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 type Return<T> = [React.MutableRefObject<T | null>, boolean];
 
-const useFixed = <T extends HTMLElement>(): Return<T> => {
-  const [fixed, setFixed] = useState<boolean>(false);
+const useCovered = <T extends HTMLElement>(): Return<T> => {
+  const [covered, setCovered] = useState<boolean>(false);
 
   const ref = useRef<T | null>(null);
 
@@ -13,7 +13,7 @@ const useFixed = <T extends HTMLElement>(): Return<T> => {
     const { clientHeight } = ref.current;
     const { scrollTop } = document.documentElement;
 
-    setFixed(clientHeight < scrollTop);
+    setCovered(clientHeight < scrollTop);
   };
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const useFixed = <T extends HTMLElement>(): Return<T> => {
     return () => window.removeEventListener("scroll", scrollEventHandler);
   }, []);
 
-  return [ref, fixed];
+  return [ref, covered];
 };
 
-export default useFixed;
+export default useCovered;
