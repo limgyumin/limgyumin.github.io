@@ -11,14 +11,14 @@ import Comments from "@/components/Comments";
 
 import useMediaQuery from "@/hooks/utils/useMediaQuery";
 import usePostDetail from "@/hooks/usePostDetail";
-import useFixed from "@/hooks/utils/useFixed";
+import useCovered from "@/hooks/utils/useCovered";
 import postDetailStore from "@/stores/postDetailStore";
 import { sizes } from "@/styles/medias";
 
 const PostDetailPage: React.FC = () => {
   usePostDetail();
   const isBiggerThanDesktop = useMediaQuery(sizes.desktop, "min");
-  const [headerRef, fixed] = useFixed<HTMLDivElement>();
+  const [headerRef, covered] = useCovered<HTMLDivElement>();
   const [article, setArticle] = useState<HTMLElement | null>(null);
 
   const articleRef = useRef<HTMLElement | null>(null);
@@ -39,7 +39,7 @@ const PostDetailPage: React.FC = () => {
     <Layout>
       <PostDetailHeader ref={headerRef} />
       {article && isBiggerThanDesktop && (
-        <TableOfContents article={article} fixed={fixed} />
+        <TableOfContents article={article} fixed={covered} />
       )}
       <PostDetailDescription />
       <PostDetailArticle ref={articleRef} />
