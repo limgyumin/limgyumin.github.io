@@ -1,26 +1,20 @@
 import React from "react";
-import { observer } from "mobx-react";
 import styled from "styled-components";
 
-import postStore from "@/stores/postStore";
-
 import PostItem from "./PostItem";
+import Post from "@/models/Post";
 
-const PostList: React.FC = () => {
-  const { posts } = postStore;
-
-  if (posts === null) {
-    return null;
-  }
-
-  return (
-    <Container data-testid="post-list">
-      {posts.map((post) => (
-        <PostItem key={post.id} post={post} />
-      ))}
-    </Container>
-  );
+type Props = {
+  posts: Post[];
 };
+
+const PostList: React.FC<Props> = ({ posts }) => (
+  <Container data-testid="post-list">
+    {posts.map((post) => (
+      <PostItem key={post.id} post={post} />
+    ))}
+  </Container>
+);
 
 const Container = styled.ul`
   padding-bottom: 3rem;
@@ -38,4 +32,4 @@ const Container = styled.ul`
   }
 `;
 
-export default observer(PostList);
+export default PostList;
