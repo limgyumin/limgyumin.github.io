@@ -20,4 +20,4 @@ class PostDetailLoader {
   }
 }
 
-export default new PostDetailLoader();
+export default PostDetailLoader;
