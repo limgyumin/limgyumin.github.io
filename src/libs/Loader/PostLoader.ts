@@ -27,4 +27,4 @@ class PostLoader {
   }
 }
 
-export default new PostLoader();
+export default PostLoader;
