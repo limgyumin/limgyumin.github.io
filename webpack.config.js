@@ -2,6 +2,7 @@ const path = require("path");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
@@ -31,7 +32,7 @@ module.exports = {
         type: "asset/resource",
       },
       {
-        test: /\.(png|jpg|jpeg|gif|webm|mp4|svg)$/,
+        test: /\.(png|jpg|jpeg|gif|webm|mp4|svg|ico)$/,
         type: "asset/resource",
         generator: {
           filename: "images/[hash][ext][query]",
@@ -54,7 +55,13 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(), // 빌드했을 시에 이전 빌드내용을 삭제함.
-    new HTMLWebpackPlugin({ template: "./public/index.html" }), // 번들링된 파일을 사용하는 html 파일로 만들어줌.
+    new HTMLWebpackPlugin({
+      template: "public/index.html",
+    }), // 번들링된 파일을 사용하는 html 파일로 만들어줌.
+    new FaviconsWebpackPlugin({
+      logo: "public/favicon.ico",
+      manifest: "public/manifest.json",
+    }),
     new ForkTsCheckerWebpackPlugin(), // TypeScript를 빌드할 때의 성능을 향상시킴.
   ],
 };
