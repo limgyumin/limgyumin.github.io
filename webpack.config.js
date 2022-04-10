@@ -2,7 +2,6 @@ const path = require("path");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
@@ -58,10 +57,6 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: "public/index.html",
     }), // 번들링된 파일을 사용하는 html 파일로 만들어줌.
-    new FaviconsWebpackPlugin({
-      logo: "public/favicon.ico",
-      manifest: "public/manifest.json",
-    }),
     new ForkTsCheckerWebpackPlugin(), // TypeScript를 빌드할 때의 성능을 향상시킴.
   ],
 };
