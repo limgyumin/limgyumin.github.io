@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const utterancesSettings = {
   src: "https://utteranc.es/client.js",
-  repo: "limgyumin/blog-v2",
+  repo: "limgyumin/limgyumin.github.io",
   "issue-term": "pathname",
   label: "utterances",
   theme: "github-light",
