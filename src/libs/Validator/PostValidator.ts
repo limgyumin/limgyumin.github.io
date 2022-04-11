@@ -1,5 +1,5 @@
 import { PostInitializer } from "@/models/Post";
-import { isNotEmpty } from "./validations";
+import { isDate, isNotEmpty } from "./validations";
 
 import Validator from "./Validator";
 
@@ -8,7 +8,7 @@ const postValidator = new Validator<PostInitializer>({
   title: [isNotEmpty],
   description: [],
   category: [],
-  createdAt: [isNotEmpty],
+  createdAt: [isNotEmpty, isDate],
 });
 
 export default postValidator;
