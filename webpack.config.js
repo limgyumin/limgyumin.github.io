@@ -31,7 +31,7 @@ module.exports = {
         type: "asset/resource",
       },
       {
-        test: /\.(png|jpg|jpeg|gif|webm|mp4|svg|ico)$/,
+        test: /\.(png|jpg|jpeg|gif|webm|mp4|svg)$/,
         type: "asset/resource",
         generator: {
           filename: "images/[hash][ext][query]",
@@ -56,6 +56,7 @@ module.exports = {
     new CleanWebpackPlugin(), // 빌드했을 시에 이전 빌드내용을 삭제함.
     new HTMLWebpackPlugin({
       template: "public/index.html",
+      favicon: "public/favicon.ico",
     }), // 번들링된 파일을 사용하는 html 파일로 만들어줌.
     new ForkTsCheckerWebpackPlugin(), // TypeScript를 빌드할 때의 성능을 향상시킴.
   ],
