@@ -1,6 +1,6 @@
 ---
-title: React Hooks에 대해서
-description: 이번 시간에는 React에서 자주 사용되는 Hooks 개념에 대해 알아보도록 하겠습니다.
+title: 테스트용 타이틀입니다.
+description: 이것은 테스트용 설명입니다.
 createdAt: 2021-10-25
 category: React
 ---

@@ -23,7 +23,6 @@ const MainPage: React.FC = () => {
 
   return (
     <Layout>
-      <Categories />
       <PostList posts={posts} />
       <PageNavigation />
     </Layout>

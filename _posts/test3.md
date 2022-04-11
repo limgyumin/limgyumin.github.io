@@ -1,6 +1,6 @@
 ---
-title: Typescript 객체지향
-description: 이번 시간에는 React, Typescript, Webpack 5 를 사용하여 개발환경을 세팅하는 방법에 대해 알아보도록 하겠습니다.
+title: 테스트용 타이틀입니다.
+description: 이것은 테스트용 설명입니다.
 createdAt: 2021-10-25
 category: Typescript
 ---

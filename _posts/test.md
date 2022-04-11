@@ -1,6 +1,6 @@
 ---
-title: React에 대해서 한번 알아보는 시간을 가져보도록 할 것입니다요요요요요요요
-description: React에 대해서 한번 알아보는 시간을 가져보도록 할 것입니다요요요요요요요
+title: 테스트용 타이틀입니다.
+description: 이것은 테스트용 설명입니다.
 createdAt: 2021-10-25
 category: Development
 ---
