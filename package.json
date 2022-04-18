@@ -40,6 +40,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/faker": "^5.5.9",
     "@types/jest": "^27.4.0",
+    "@types/loadable__component": "^5.13.4",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-icons": "^3.0.0",
@@ -75,6 +76,7 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.2",
     "dayjs": "^1.10.7",
     "markdown-to-jsx": "^7.1.6",
     "mobx": "^6.3.13",
