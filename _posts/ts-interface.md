@@ -1,5 +1,5 @@
 ---
-title: Interface와 의존성 주입에 대해 알아 보자.
+title: Interface와 의존성 주입에 대해 알아 보자
 description: 클래스 간의 결합도가 높아서 생기는 문제는 어떤 것이 있을까요? 어떻게 결합도는 낮고 응집도를 높혀서 유연한 설계가 가능하도록 할 수 있을까요? 이번 글에서는 TypeScript의 Interface와 의존성 주입 (Dependency Injection)에 대해 알아보려 합니다.
 createdAt: 2022-12-04
 category: TypeScript
