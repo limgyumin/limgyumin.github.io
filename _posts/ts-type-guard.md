@@ -130,10 +130,10 @@ type Response = Success | Failure;
 const func = (response: Response) => {
   switch(response.result) {
     case 'success':
-      response.data // object
+      response // Success
       break;
     case 'failure':
-      response.reason // string
+      response // Failure
       break;
   }
 }
@@ -148,11 +148,11 @@ result 프로퍼티를 태그로 사용하고, 값에 따라 해당하는 객체
 ```ts
 const func = (response: Response) => {
   if ('data' in response) {
-      res.data // object
+    response // Success
   }
 
   if ('reason' in response) {
-    response.reason // string
+    response // Failure
   }
 }
 ```
@@ -162,7 +162,7 @@ const func = (response: Response) => {
 ```ts
 const func = (response: Response) => {
   if ('result' in response) {
-      response.data // Success 타입으로 좁혀지지 않아 접근 불가
+    response // Success | Failure
   }
 }
 ```
@@ -193,7 +193,7 @@ if ('value' in element) {
 HTMLElement & Record<"value", unknown>
 ```
 
-👤: HTMLElement 타입인데 value 프로퍼티를 가지고 있으면 HTMLElement 타입에서 value 프로퍼티가 확장된 타입이겠지 엌ㅋㅋㅋ
+TS: HTMLElement 타입인데 value 프로퍼티를 가지고 있으면 HTMLElement 타입에서 value 프로퍼티가 확장된 타입이겠지 엌ㅋㅋㅋ
 
 타입이 이상하게 좁혀졌습니다..? HTMLInputElement 타입은 HTMLElement의 확장된 타입이기 때문에 TypeScript는 HTMLElement 타입만으로 value 프로퍼티가 포함되었다고 해서 HTMLInputElement 타입이라고 보장할 수가 없는 것입니다.
 
@@ -263,11 +263,11 @@ const isDefined = <T>(value: T | undefined): value is T => {
 }
 
 const func = (arr: (string | undefined)[]) => {
-   const filtered = arr.filter(isDefined);
+  const filtered = arr.filter(isDefined);
 
-   filtered // string[]
+  filtered // string[]
 }
 ```
 
-와우 성공적으로 `string[]` 타입으로 좁혀졌습니다. 
+와우 성공적으로 `string[]` 타입으로 좁혀졌습니다.
 
