@@ -1,7 +1,7 @@
 ---
 title: TypeScript의 Type Guard에 대해 알아 보자
 description: Union 타입과 같이 여러 타입이 될 수 있는 모호한 타입을 다룰 때 어떻게 타입을 좁혀서 사용할 수 있을까요? 이번 글에서는 TypeScript의 Type-Guard 개념에 대해 알아보려 합니다.
-createdAt: 2023-1-27
+createdAt: 2023-01-27
 category: TypeScript
 ---
 
