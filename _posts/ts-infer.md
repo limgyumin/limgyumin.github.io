@@ -1,7 +1,7 @@
 ---
 title: TypeScript의 Infer에 대해 알아 보자
 description: 객체나 배열과 같은 복잡한 타입에서 특정 요소의 타입만 가져오고 싶을 때가 있지 않으신가요? 이번 글에서는 TypeScript의 기능 중 Infer에 대해 알아보려 합니다.
-createdAt: 2023-1-23
+createdAt: 2023-01-23
 category: TypeScript
 ---
 
